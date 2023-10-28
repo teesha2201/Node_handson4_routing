@@ -34,12 +34,10 @@ const register = (req,res)=>{
         phoneNo:data.phoneNo,
 
     }
-    array.push(tempobj)
-    const token = jwt.sign({useremail:data.email},secret_key,{expiresIn:"360000"}) 
-    // console.log(token);
-    // console.log(tempobj);
+    array.push(tempobj);
+    const token = jwt.sign({useremail:data.email},secret_key,{expiresIn:"4 d"}) 
     // res.send(array)
-   return res.send({msg:'Registered Successfully',token:token})
+   return res.send({msg:'Registered Successfully',token:token,array:array})
 }
 const login = (req,res)=>{
     
@@ -47,7 +45,7 @@ const login = (req,res)=>{
     const loginDetail = array.find((item)=>{
         if(item.email===logindata.email) 
         {
-            console.log(item)
+            // console.log(item)
             return item;
         }
     })
@@ -56,10 +54,9 @@ const login = (req,res)=>{
         const validate = bcrypt.compareSync(logindata.password,loginDetail.password)
         if(validate)
             {
-                const token = jwt.sign({useremail:logindata.email},secret_key,{expiresIn:"360000"}) 
-                // console.log(token);
+                const token = jwt.sign({useremail:logindata.email},secret_key,{expiresIn:"4 d"}) 
                 // console.log("Login-Detalis: " ,logindata)
-                return res.send({msg:'User Successfully LoggedIn ...',token:token})
+                return res.send({msg:'User Successfully LoggedIn ...',token:token,array:array})
             }
             else
             {
@@ -68,7 +65,6 @@ const login = (req,res)=>{
     }
     else
     {
-        console.log('Email is Wrong');
         return res.send({msg:'email is Wrong'})
     }
     
