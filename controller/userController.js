@@ -50,7 +50,6 @@ const login = (req,res)=>{
         }
     })
     if(loginDetail){
-        
         const validate = bcrypt.compareSync(logindata.password,loginDetail.password)
         if(validate)
             {
@@ -60,15 +59,13 @@ const login = (req,res)=>{
             }
             else
             {
-                return res.send({msg:'Password is Wrong'})
+                return res.send({msg:'Password is Incorrect'})
             }    
     }
     else
     {
-        return res.send({msg:'email is Wrong'})
+        return res.send({msg:'email is not Registered'})
     }
-    
-
 }
 
 module.exports = {register,login}
